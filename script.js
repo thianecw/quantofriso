@@ -1,16 +1,21 @@
 document.getElementById("calcular").addEventListener("click", () => {
 	// Pega os valores dos inputs
-	const pano = Number.parseFloat(document.getElementById("pano").value);
+	const tecido = Number.parseFloat(document.getElementById("tecido").value);
 	const friso = Number.parseFloat(document.getElementById("friso").value);
 	const qtdade = Number.parseInt(document.getElementById("qtdade").value);
 	const largura = Number.parseFloat(document.getElementById("largura").value);
 
+	// Ver se o item pano inteiro está checado
+	const tecidoInteiroCheckbox =
+		document.querySelector(".custom-checkbox1").checked;
+
 	// Pega o estado do checkbox
-	const emendarPano = document.querySelector(".custom-checkbox").checked;
+	const margemSegurancaCheckbox =
+		document.querySelector(".custom-checkbox2").checked;
 
 	// Verifica se todos os campos foram preenchidos
 	if (
-		Number.isNaN(pano) ||
+		Number.isNaN(tecido) ||
 		Number.isNaN(friso) ||
 		Number.isNaN(qtdade) ||
 		Number.isNaN(largura)
@@ -23,13 +28,18 @@ document.getElementById("calcular").addEventListener("click", () => {
 	document.getElementById("error-message").style.display = "none";
 
 	// Calcula o primeiro resultado: Quantidade de pano / Quantidade de friso
-	const primeiroResultado = pano / friso;
+	let primeiroResultado = tecido / friso;
+
+	// Se o checkbox "O pano não está inteiro" estiver marcado, arredonda para baixo
+	if (tecidoInteiroCheckbox) {
+		primeiroResultado = Math.floor(primeiroResultado);
+	}
 
 	// Calcula o resultado final: (Quantidade de peças / primeiroResultado) * largura
 	let resultadoFinal = (qtdade / primeiroResultado) * largura;
 
-	// Se o checkbox estiver marcado, adiciona 10cm ao resultado
-	if (emendarPano) {
+	// Se o checkbox margem de segurança estiver marcado, adiciona 10cm ao resultado
+	if (margemSegurancaCheckbox) {
 		resultadoFinal += 10;
 	}
 
@@ -39,26 +49,17 @@ document.getElementById("calcular").addEventListener("click", () => {
 
 	// Torna o texto do resultado visível
 	resultadoElement.style.display = "block"; // Muda de "none" para "block"
+});
 
+document.getElementById("limpar").addEventListener("click", () => {
 	// Limpa os campos de input
-	document.getElementById("pano").value = "";
+	document.getElementById("tecido").value = "";
 	document.getElementById("friso").value = "";
 	document.getElementById("qtdade").value = "";
 	document.getElementById("largura").value = "";
-	document.querySelector(".custom-checkbox").checked = false;
+	document.querySelector(".custom-checkbox1").checked = false;
+	document.querySelector(".custom-checkbox2").checked = false;
 
-	// Mudar a justificação da div para a esquerda quando o resultado for visível
-	document.querySelector(".divresultado").style.justifyContent = "flex-start";
+	// Limpa o texto do resultado
+	document.getElementById("resultado").style.display = "none"; // Usa display: none
 });
-
-// Ao clicar no input, limpa o resultado e retorna a justificação ao centro
-const inputs = document.querySelectorAll("input");
-for (let i = 0; i < inputs.length; i++) {
-	inputs[i].addEventListener("focus", () => {
-		// Limpa o texto do resultado
-		document.getElementById("resultado").style.display = "none"; // Usa display: none
-
-		// Ao limpar os inputs, centraliza o ícone
-		document.querySelector(".divresultado").style.justifyContent = "center";
-	});
-}

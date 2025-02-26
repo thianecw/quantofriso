@@ -11,7 +11,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
-    <title>Quanto friso?</title>
+<link rel="icon" type="image/png" sizes="16x16"  href="favicon-16x16.png">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="theme-color" content="#ffffff">    
+<title>Quanto friso?</title>
 </head>
 
 <body>
@@ -21,34 +24,45 @@
         <form> 
             <div class="containerInputs">
                 <div>
-                    <label for="pano">Tamanho do pano <span>*</span></label>
-                    <input type="number" id="pano" placeholder="cm">
+                    <label for="tecido">Largura do tecido <span>*</span></label>
+                    <input type="number" id="tecido" placeholder="cm">
                 </div>
 
                 <div>
-                    <label for="friso">Quanto friso vai na amostra <span>*</span></label>
+                    <label for="friso">Medida do local de aplicação do friso <span>*</span></label>
                     <input type="number" id="friso" placeholder="cm">
                 </div>
 
                 <div>
-                    <label for="qtdade">Quantidade de peças? <span>*</span></label>
+                    <label for="qtdade">Quantidade de peças <span>*</span></label>
                     <input type="number" id="qtdade" placeholder="unidades">
                 </div>
 
                 <div>
-                    <label for="largura">Largura do friso? <span>*</span></label>
+                    <label for="largura">Largura do friso <span>*</span></label>
                     <input type="number" id="largura" placeholder="cm">
                 </div>
             </div>   
         </form>
 
+        <div class="divcheckbox"> 
         <label class="checkbox-container">
-            <input class="custom-checkbox" type="checkbox">
-            <p class="checkbox-p"> O pano não está inteiro</p>
+            <input class="custom-checkbox1" type="checkbox">
+            <p class="checkbox-p"> O pano <span> não</span> está inteiro</p>
             <span class="checkmark"></span>
         </label>
 
-        <button id="calcular"> Calcular </button>
+        <label class="checkbox-container">
+            <input class="custom-checkbox2" type="checkbox">
+            <p class="checkbox-p"> Margem de desperdício</p>
+            <span class="checkmark"></span>
+        </label>
+    </div>
+
+    <div class="divbutton"> 
+    <button id="calcular"> Calcular </button>
+    <button id="limpar"> Limpar </button>
+</div>
 
       <div class="divresultado"> 
       <img src="https://img.icons8.com/wired/64/scissors.png" alt="scissors"/>
