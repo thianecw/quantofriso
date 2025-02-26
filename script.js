@@ -33,21 +33,32 @@ document.getElementById("calcular").addEventListener("click", () => {
 		resultadoFinal += 10;
 	}
 
-	// Exibe o resultado e torna a frase visível
+	// Exibe o resultado
 	const resultadoElement = document.getElementById("resultado");
 	resultadoElement.textContent = `${resultadoFinal.toFixed(2)} cm`;
 
-	// Torna a frase visível
-	document.querySelector(".resultado").style.visibility = "visible";
-	clearInput();
-});
+	// Torna o texto do resultado visível
+	resultadoElement.style.display = "block"; // Muda de "none" para "block"
 
-function clearInput() {
-	// Limpa todos os campos de input
+	// Limpa os campos de input
 	document.getElementById("pano").value = "";
 	document.getElementById("friso").value = "";
 	document.getElementById("qtdade").value = "";
 	document.getElementById("largura").value = "";
-	// Limpa o estado do checkbox
 	document.querySelector(".custom-checkbox").checked = false;
+
+	// Mudar a justificação da div para a esquerda quando o resultado for visível
+	document.querySelector(".divresultado").style.justifyContent = "flex-start";
+});
+
+// Ao clicar no input, limpa o resultado e retorna a justificação ao centro
+const inputs = document.querySelectorAll("input");
+for (let i = 0; i < inputs.length; i++) {
+	inputs[i].addEventListener("focus", () => {
+		// Limpa o texto do resultado
+		document.getElementById("resultado").style.display = "none"; // Usa display: none
+
+		// Ao limpar os inputs, centraliza o ícone
+		document.querySelector(".divresultado").style.justifyContent = "center";
+	});
 }

@@ -24,18 +24,23 @@ body {
 	background-image: url("fitaimg.png");
 	background-size: cover;
 	background-position: center;
+	display: flex;
+	align-items: end;
+	justify-content: center;
 }
 
 h1 {
 	filter: invert(1);
-	font-weight: 300;
-	font-size: 30px;
+	font-weight: 600;
+	font-size: 40px;
+	font-family: "Quicksand", serif;
 }
 
 h1 img {
 	width: 40px;
 	height: 40px;
 }
+
 .container {
 	display: flex;
 	flex-direction: column;
@@ -95,7 +100,7 @@ input[type="number"] {
 }
 
 span {
-	color: rgb(181, 130, 35);
+	color: #e99f4c;
 	font-weight: 500;
 }
 
@@ -127,18 +132,26 @@ p {
 	font-size: 18px;
 }
 
-.resultado {
-	visibility: hidden;
+.divresultado {
+	display: flex;
+	align-items: center;
+	justify-content: center; /* Inicialmente, o ícone será centralizado */
+	gap: 10px;
+	transition: justify-content 0.2s ease; /* Transição suave */
 }
 
-.resultado img {
+.divresultado img {
 	filter: invert(1);
 	width: 40px;
 	height: 40px;
+	margin-bottom: 10px;
 }
 
 #resultado {
 	font-size: 26px;
+	font-weight: bold;
+	display: none;
+	font-weight: bold;
 }
 
 #error-message {
