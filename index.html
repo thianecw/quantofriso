@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;900&display=swap" rel="stylesheet">
+    <title>Quanto friso?</title>
+</head>
+
+<body>
+    <div class="wallpaper" img src="fitaimg.jpg">    </div>
+    <h1>Quanto friso?</h1> 
+
+    <div class="container"> 
+        <form> 
+            <div class="containerInputs">
+                <div>
+                    <label for="pano">Tamanho do pano <span>*</span></label>
+                    <input type="number" id="pano" placeholder="cm">
+                </div>
+
+                <div>
+                    <label for="friso">Quanto friso vai na amostra <span>*</span></label>
+                    <input type="number" id="friso" placeholder="cm">
+                </div>
+
+                <div>
+                    <label for="qtdade">Quantidade de peças? <span>*</span></label>
+                    <input type="number" id="qtdade" placeholder="unidades">
+                </div>
+
+                <div>
+                    <label for="largura">Largura do friso? <span>*</span></label>
+                    <input type="number" id="largura" placeholder="cm">
+                </div>
+            </div>   
+        </form>
+
+        <label class="checkbox-container">
+            <input class="custom-checkbox" checked="" type="checkbox">
+            <p class="checkbox-p"> O pano não está inteiro</p>
+            <span class="checkmark"></span>
+        </label>
+
+        <button id="calcular"> Calcular </button>
+
+      
+        <p class="resultado"> <img src="https://img.icons8.com/wired/64/scissors.png" alt="scissors"/> <span id="resultado"></span></p>
+        <p id="error-message">Preencha todos os campos!</p>
+    </div>
+    </div>
+    <p> <span> * </span> Todos os campos são de preenchimento obrigatório</p>
+    
+   
+<script src="script.js"> </script>
+</body>
+    </html>
