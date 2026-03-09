@@ -1,9 +1,15 @@
 document.getElementById("calcular").addEventListener("click", () => {
 	// Pega os valores dos inputs
-	const tecido = Number.parseFloat(document.getElementById("tecido").value);
-	const friso = Number.parseFloat(document.getElementById("friso").value);
+	const larguraTecido = Number.parseFloat(
+		document.getElementById("larguraTecido").value,
+	);
+	const localFriso = Number.parseFloat(
+		document.getElementById("localFriso").value,
+	);
 	const qtdade = Number.parseInt(document.getElementById("qtdade").value);
-	const largura = Number.parseFloat(document.getElementById("largura").value);
+	const larguraFriso = Number.parseFloat(
+		document.getElementById("larguraFriso").value,
+	);
 
 	// Ver se o item pano inteiro está checado
 	const tecidoInteiroCheckbox =
@@ -15,10 +21,10 @@ document.getElementById("calcular").addEventListener("click", () => {
 
 	// Verifica se todos os campos foram preenchidos
 	if (
-		Number.isNaN(tecido) ||
-		Number.isNaN(friso) ||
+		Number.isNaN(larguraTecido) ||
+		Number.isNaN(localFriso) ||
 		Number.isNaN(qtdade) ||
-		Number.isNaN(largura)
+		Number.isNaN(larguraFriso)
 	) {
 		document.getElementById("error-message").style.display = "block"; // Exibe a mensagem de erro
 		return; // Sai da função se algum campo estiver vazio
@@ -28,19 +34,20 @@ document.getElementById("calcular").addEventListener("click", () => {
 	document.getElementById("error-message").style.display = "none";
 
 	// Calcula o primeiro resultado: Quantidade de pano / Quantidade de friso
-	let primeiroResultado = tecido / friso;
+	let primeiroResultado = larguraTecido / localFriso;
 
 	// Se o checkbox "O pano não está inteiro" estiver marcado, arredonda para baixo
 	if (tecidoInteiroCheckbox) {
 		primeiroResultado = Math.floor(primeiroResultado);
 	}
 
-	// Calcula o resultado final: (Quantidade de peças / primeiroResultado) * largura
-	let resultadoFinal = (qtdade / primeiroResultado) * largura;
+	// Calcula o resultado base
+	let resultadoFinal =
+		(qtdade / primeiroResultado) * larguraFriso + 3 * larguraFriso;
 
-	// Se o checkbox margem de segurança estiver marcado, adiciona 10cm ao resultado
+	// Se margem estiver marcada, adiciona
 	if (margemSegurancaCheckbox) {
-		resultadoFinal += 10;
+		resultadoFinal *= 1.2;
 	}
 
 	// Exibe o resultado
@@ -48,15 +55,15 @@ document.getElementById("calcular").addEventListener("click", () => {
 	resultadoElement.textContent = `${resultadoFinal.toFixed(2)} cm`;
 
 	// Torna o texto do resultado visível
-	resultadoElement.style.display = "block"; // Muda de "none" para "block"
+	resultadoElement.style.display = "block";
 });
 
 document.getElementById("limpar").addEventListener("click", () => {
 	// Limpa os campos de input
-	document.getElementById("tecido").value = "";
-	document.getElementById("friso").value = "";
+	document.getElementById("larguraTecido").value = "";
+	document.getElementById("localFriso").value = "";
 	document.getElementById("qtdade").value = "";
-	document.getElementById("largura").value = "";
+	document.getElementById("larguraFriso").value = "";
 	document.querySelector(".custom-checkbox1").checked = false;
 	document.querySelector(".custom-checkbox2").checked = false;
 
