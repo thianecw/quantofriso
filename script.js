@@ -1,5 +1,4 @@
-document.getElementById("calcular").addEventListener("click", () => {
-	// Pega os valores dos inputs
+function calcular() {
 	const larguraTecido = Number.parseFloat(
 		document.getElementById("larguraTecido").value,
 	);
@@ -11,62 +10,78 @@ document.getElementById("calcular").addEventListener("click", () => {
 		document.getElementById("larguraFriso").value,
 	);
 
-	// Ver se o item pano inteiro está checado
 	const tecidoInteiroCheckbox =
 		document.querySelector(".custom-checkbox1").checked;
 
-	// Pega o estado do checkbox
-	const margemSegurancaCheckbox =
-		document.querySelector(".custom-checkbox2").checked;
+	const margemDesperdicio = Number.parseFloat(
+		document.getElementById("margemDesperdicio").value,
+	);
 
-	// Verifica se todos os campos foram preenchidos
 	if (
 		Number.isNaN(larguraTecido) ||
 		Number.isNaN(localFriso) ||
 		Number.isNaN(qtdade) ||
 		Number.isNaN(larguraFriso)
 	) {
-		document.getElementById("error-message").style.display = "block"; // Exibe a mensagem de erro
-		return; // Sai da função se algum campo estiver vazio
+		document.getElementById("error-message").style.display = "block";
+		return;
 	}
 
-	// Esconde a mensagem de erro se todos os campos foram preenchidos
 	document.getElementById("error-message").style.display = "none";
 
-	// Calcula o primeiro resultado: Quantidade de pano / Quantidade de friso
 	let primeiroResultado = larguraTecido / localFriso;
 
-	// Se o checkbox "O pano não está inteiro" estiver marcado, arredonda para baixo
 	if (tecidoInteiroCheckbox) {
 		primeiroResultado = Math.floor(primeiroResultado);
 	}
 
-	// Calcula o resultado base
 	let resultadoFinal =
 		(qtdade / primeiroResultado) * larguraFriso + 3 * larguraFriso;
 
-	// Se margem estiver marcada, adiciona
-	if (margemSegurancaCheckbox) {
-		resultadoFinal *= 1.2;
-	}
+	resultadoFinal *= 1 + margemDesperdicio;
 
-	// Exibe o resultado
 	const resultadoElement = document.getElementById("resultado");
 	resultadoElement.textContent = `${resultadoFinal.toFixed(2)} cm`;
-
-	// Torna o texto do resultado visível
 	resultadoElement.style.display = "block";
-});
+}
+
+for (const option of document.querySelectorAll(".margem-option")) {
+	option.addEventListener("click", () => {
+		const isActive = option.classList.contains("active");
+
+		for (const o of document.querySelectorAll(".margem-option")) {
+			o.classList.remove("active");
+		}
+
+		if (!isActive) {
+			option.classList.add("active");
+			document.getElementById("margemDesperdicio").value = option.dataset.value;
+		} else {
+			document.getElementById("margemDesperdicio").value = "0";
+		}
+
+		// Recalcula automaticamente se já houver resultado na tela
+		const resultadoVisivel =
+			document.getElementById("resultado").style.display === "block";
+		if (resultadoVisivel) {
+			calcular();
+		}
+	});
+}
+
+document.getElementById("calcular").addEventListener("click", calcular);
 
 document.getElementById("limpar").addEventListener("click", () => {
-	// Limpa os campos de input
 	document.getElementById("larguraTecido").value = "";
 	document.getElementById("localFriso").value = "";
 	document.getElementById("qtdade").value = "";
 	document.getElementById("larguraFriso").value = "";
 	document.querySelector(".custom-checkbox1").checked = false;
-	document.querySelector(".custom-checkbox2").checked = false;
 
-	// Limpa o texto do resultado
-	document.getElementById("resultado").style.display = "none"; // Usa display: none
+	for (const o of document.querySelectorAll(".margem-option")) {
+		o.classList.remove("active");
+	}
+	document.getElementById("margemDesperdicio").value = "0";
+
+	document.getElementById("resultado").style.display = "none";
 });

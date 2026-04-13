@@ -262,6 +262,76 @@ p {
 	animation: checkAnim 0.2s forwards;
 }
 
+.margem-group {
+	margin-top: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 10px;
+}
+
+.margem-group p {
+	font-size: 16px;
+	font-weight: 300;
+	color: white;
+}
+
+.margem-options {
+	display: flex;
+	gap: 10px;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.margem-option {
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+	font-size: 16px;
+	font-weight: 300;
+	color: white;
+	padding: 6px 14px 6px 32px;
+	border: 1px solid rgba(255, 255, 255, 0.5);
+	border-radius: 20px;
+	user-select: none;
+	position: relative;
+	background: rgba(255, 255, 255, 0.08);
+	transition: 0.2s linear;
+}
+
+.margem-option::before {
+	content: "";
+	position: absolute;
+	left: 10px;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 14px;
+	height: 14px;
+	border-radius: 50%;
+	border: 2px solid rgba(255, 255, 255, 0.6);
+	background: transparent;
+	box-sizing: border-box;
+	transition: 0.2s linear;
+}
+
+.margem-option.active {
+	border-color: #e99f4c;
+	background: rgba(233, 159, 76, 0.15);
+	color: #e99f4c;
+	box-shadow: 3px 4px 0px 1px #e99f4c;
+}
+
+.margem-option.active::before {
+	border-color: #e99f4c;
+	background: #e99f4c;
+	box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.15);
+}
+
+.margem-option:hover:not(.active) {
+	border-color: rgba(255, 255, 255, 0.9);
+	background: rgba(255, 255, 255, 0.15);
+}
+
 /* Media Query para telas pequenas */
 @media screen and (max-width: 600px) {
 	.container {
@@ -288,5 +358,10 @@ p {
 
 	p {
 		font-size: 14px;
+	}
+
+	.margem-option {
+		font-size: 14px;
+		padding: 5px 12px 5px 28px;
 	}
 }
